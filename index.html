@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renewable Energy Systems Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter Font -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb; /* Light background for the overall page */
+        }
+        /* Custom styles for the portfolio container */
+        .portfolio-container {
+            display: flex;
+            min-height: 100vh;
+            /* Ensure the content is visible below the header on small screens */
+            padding-top: 4rem; 
+        }
+        /* Style for the navigation links */
+        .nav-link {
+            transition: all 0.2s;
+        }
+        .nav-link.active {
+            background-color: #3b82f6; /* Blue 500 */
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        /* Ensure the main content uses scroll for overflow */
+        .content-area {
+            overflow-y: auto;
+        }
+
+        /* Responsive Sidebar: Hide on mobile, show as full width navigation bar */
+        @media (max-width: 768px) {
+            .portfolio-container {
+                flex-direction: column;
+                padding-top: 0; /* Remove padding when sidebar is on top */
+            }
+            .sidebar {
+                position: fixed; /* Fixed bar at the top for mobile */
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 4rem; /* Standard height for nav bar */
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                z-index: 50;
+                border-radius: 0;
+                padding: 0.5rem 1rem;
+                overflow-x: auto; /* Allow horizontal scrolling if necessary */
+                white-space: nowrap;
+            }
+            .nav-link {
+                margin: 0 0.25rem;
+                padding: 0.5rem 1rem;
+                flex-shrink: 0; /* Prevent shrinking */
+            }
+            .content-area {
+                padding-top: 4rem; /* Push content down below the fixed nav bar */
+            }
+        }
+
+        /* Styling for image captions in Activity 4 */
+        .image-caption {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+    <!-- Load lucide icons for a professional look -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50">
+
+    <div class="portfolio-container">
+
+        <!-- Sidebar / Left-Hand Navigation Panel -->
+        <aside id="sidebar" class="sidebar md:w-64 bg-gray-800 text-white p-6 shadow-xl flex flex-col space-y-4 md:sticky md:top-0 md:h-screen transition-all duration-300">
+            
+            <div class="text-2xl font-bold text-blue-400 border-b pb-4 mb-4 border-gray-700">
+                My Portfolio
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="flex flex-col space-y-2 md:space-y-4">
+                <h3 class="text-sm font-semibold uppercase text-gray-400 pt-2">Portfolio Sections</h3>
+
+                <!-- Profile / Home -->
+                <button data-activity="profile" id="nav-profile" 
+                        class="nav-link active bg-gray-700 hover:bg-blue-600 p-3 rounded-xl flex items-center space-x-3 text-left transition-colors">
+                    <span data-lucide="user" class="w-5 h-5"></span>
+                    <span>Profile / Home</span>
+                </button>
+
+                <h3 class="text-sm font-semibold uppercase text-gray-400 pt-2 border-t border-gray-700 mt-4 pt-4">Portfolio Activities</h3>
+
+                <!-- Activity 1 -->
+                <button data-activity="activity1" id="nav-activity1" 
+                        class="nav-link bg-gray-700 hover:bg-blue-600 p-3 rounded-xl flex items-center space-x-3 text-left transition-colors">
+                    <span data-lucide="waves" class="w-5 h-5"></span>
+                    <span>Activity 1: Wave Energy</span>
+                </button>
+                
+                <!-- Activity 2 -->
+                <button data-activity="activity2" id="nav-activity2" 
+                        class="nav-link bg-gray-700 hover:bg-blue-600 p-3 rounded-xl flex items-center space-x-3 text-left transition-colors">
+                    <span data-lucide="thermometer-sun" class="w-5 h-5"></span>
+                    <span>Activity 2: Geothermal System</span>
+                </button>
+
+                <!-- Activity 3 -->
+                <button data-activity="activity3" id="nav-activity3" 
+                        class="nav-link bg-gray-700 hover:bg-blue-600 p-3 rounded-xl flex items-center space-x-3 text-left transition-colors">
+                    <span data-lucide="tree-pine" class="w-5 h-5"></span>
+                    <span>Activity 3: Biomass Energy</span>
+                </button>
+                
+                <!-- Activity 4 (NEW ML Model Activity) -->
+                <button data-activity="activity4" id="nav-activity4" 
+                        class="nav-link bg-gray-700 hover:bg-purple-600 p-3 rounded-xl flex items-center space-x-3 text-left transition-colors">
+                    <span data-lucide="brain-circuit" class="w-5 h-5"></span>
+                    <span>Activity 4: Clean Energy ML</span>
+                </button>
+            </div>
+            
+            <p class="text-xs text-gray-500 mt-auto pt-4 border-t border-gray-700">Deadline: 29th Oct 2025</p>
+
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 content-area p-4 md:p-10">
+
+            <div class="bg-white p-6 md:p-10 rounded-3xl shadow-2xl transition-all duration-300">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">Renewable Energy Systems Portfolio</h1>
+                <p class="text-gray-500 mb-6 border-b pb-4">A Clean and Green Energy Course Submission</p>
+
+                <!-- Activity Content Container -->
+                <div id="content-container">
+                    
+                    <!-- Profile Content (New Home Page) -->
+                    <section id="profile" data-activity-content class="space-y-8">
+                        <h2 class="text-3xl font-bold text-blue-600 border-b pb-3 mb-4">Student Profile & Course Submission</h2>
+                        
+                        <div class="space-y-4 bg-blue-50 p-6 rounded-xl shadow-md">
+                            <h3 class="text-2xl font-semibold text-gray-800">Vedant Jena</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+                                <p><strong>Institution:</strong> SRMIST, KTR</p>
+                                <p><strong>Registration Number:</strong> RA2311026010452</p>
+                                <p><strong>Program/Year:</strong> 3rd year B Tech CSE AI&ML</p>
+                                <p><strong>Section:</strong> AI1</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 bg-green-50 p-6 rounded-xl shadow-md border-l-4 border-green-500">
+                            <h3 class="text-2xl font-semibold text-green-700 flex items-center space-x-2">
+                                <span data-lucide="leaf" class="w-6 h-6"></span>
+                                Course Submission Details
+                            </h3>
+                            <p class="text-gray-700"><strong>Course:</strong> Clean and Green Energy</p>
+                            <p class="text-gray-700"><strong>Assignment:</strong> Website Portfolio Submission (Total: 15 Marks)</p>
+                            <p class="text-sm text-gray-500">Deadline: 29th Oct 2025</p>
+                        </div>
+
+                        <div class="space-y-4 pt-4">
+                            <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Submission Instructions Overview</h3>
+                            <p class="text-gray-700">This portfolio documents the solutions for three chosen design/application-oriented questions related to Renewable Energy Systems. Use the left navigation panel to view <strong>Activity 1</strong>, <strong>Activity 2</strong>, and <strong>Activity 3</strong>, each containing the system architecture and a detailed technical explanation.</p>
+                            <p class="text-gray-700 font-medium">Evaluation will focus on Website Design & Navigation, Completeness of Block Diagrams, Relevance & Quality of Explanation, and Originality.</p>
+                        </div>
+                    </section>
+
+
+                    <!-- Activity 1 Content -->
+                    <section id="activity1" data-activity-content class="hidden space-y-8">
+                        <h2 class="text-2xl font-bold text-blue-600">🌊 Activity 1: Wave Energy Conversion System</h2>
+                        
+                        <!-- Problem Statement -->
+                        <div class="space-y-4 p-5 bg-blue-50 rounded-xl shadow-inner border border-blue-200">
+                            <h3 class="text-xl font-bold text-blue-700">Problem Statement</h3>
+                            <p class="text-gray-700">Coastal regions across the world face persistent energy challenges due to their dependence on fossil fuel-based electricity and limited access to centralized grids. Building traditional energy infrastructure in remote or island communities is costly and environmentally taxing. Meanwhile, the ocean provides a vast, predictable, and renewable energy source — wave energy — with high energy density (**2–3 kW/m&sup2;**). However, harnessing this resource effectively remains a challenge. Current wave energy technologies struggle with low efficiency (**25–40%**), high capital costs, vulnerability to storms, inconsistent power output, and complex maintenance in harsh marine environments. There is also difficulty in integrating the irregular wave energy output with existing power grids. Hence, there is a pressing need for a **compact, reliable, and cost-effective wave energy converter (WEC)** that can consistently generate clean electricity for coastal communities, withstand varying sea conditions, minimize environmental impact, and remain economically viable with minimal maintenance.</p>
+
+                            <h3 class="text-xl font-bold text-blue-700 pt-3 border-t border-blue-200">Proposed Solution</h3>
+                            <p class="text-gray-700">The proposed **Hybrid Wave Energy Conversion System** integrates multiple renewable and intelligent control technologies:
+                                <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                                    <li>**Multi-mode WEC** using point absorbers, oscillating water columns, and attenuators for maximum wave capture.</li>
+                                    <li>**Hybrid integration** with solar and offshore wind energy, managed by a smart controller for stable power supply.</li>
+                                    <li>**Advanced energy storage** with Li-ion batteries and supercapacitors for continuous electricity during low-wave periods.</li>
+                                    <li>**Intelligent grid interface** featuring predictive monitoring and MPPT optimization to ensure efficient, grid-synchronized delivery.</li>
+                                </ul>
+                                This integrated approach provides sustainable, low-emission, and modular energy solutions for island nations, fishing villages, and offshore facilities — reducing diesel use, lowering **CO<sub>2</sub>** emissions by **150–200** tons annually, and ensuring energy security for vulnerable coastal regions.
+                            </p>
+                        </div>
+                        
+                        <!-- Block Diagram -->
+                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800 flex items-center space-x-2">
+                                <span data-lucide="layout-grid" class="w-5 h-5 text-blue-500"></span>
+                                System Block Diagram / Architecture
+                            </h3>
+                            <div class="overflow-x-auto">
+                                <!-- The uploaded image is referenced here -->
+                                <img src="Wave Block.png" 
+                                     alt="Block Diagram for Wave Energy Conversion System" 
+                                     class="w-full h-auto rounded-lg shadow-lg min-w-[800px] border-2 border-blue-200">
+                            </div>
+                            <p class="image-caption">Fig 1. Multi-Mode Wave Energy Conversion System Architecture.</p>
+                        </div>
+
+                        <!-- Explanation Section -->
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-semibold text-gray-800 flex items-center space-x-2">
+                                <span data-lucide="message-square" class="w-5 h-5 text-blue-500"></span>
+                                Explanation (195 Words)
+                            </h3>
+                            <ul class="list-none space-y-4">
+                                <!-- Source of Energy -->
+                                <li class="p-4 bg-blue-50 rounded-lg shadow-sm explanation-content-item">
+                                    <strong class="text-blue-700">Source of Energy:</strong> The system harnesses the kinetic and potential energy from ocean waves, which are ultimately wind-driven. Wave energy is highly predictable and dense, with power ranging from **20-70 kW/m** of wave front. Near-shore positioning facilitates easier maintenance access while capturing significant power.
+                                </li>
+                                <!-- Conversion Process -->
+                                <li class="p-4 bg-blue-50 rounded-lg shadow-sm explanation-content-item">
+                                    <strong class="text-blue-700">Conversion Process:</strong> Waves drive the Wave Energy Converter's (WEC) floating buoys, generating mechanical motion. This motion activates hydraulic cylinders to pressurize fluid, which in turn drives a hydraulic motor connected to an electric generator. The variable AC output is then rectified and conditioned by power electronics. A smart controller integrates this power with inputs from co-located solar/wind systems, managing the load and charging the battery storage.
+                                </li>
+                                <!-- Output/Utilization -->
+                                <li class="p-4 bg-blue-50 rounded-lg shadow-sm explanation-content-item">
+                                    <strong class="text-blue-700">Output/Utilization:</strong> The system provides **50-200 kW** of continuous baseload power, sufficient for **100-400** coastal homes. The modular design is scalable for larger applications. Excess energy is stored in battery banks for continuous supply during periods of low wave activity or at night.
+                                </li>
+                                <!-- Real-world Application Relevance -->
+                                <li class="p-4 bg-blue-50 rounded-lg shadow-sm explanation-content-item">
+                                    <strong class="text-blue-700">Real-world Application Relevance:</strong> This technology directly addresses energy poverty in remote island nations (e.g., Pacific Islands) and coastal villages. It reduces reliance on expensive diesel generators, leading to lower carbon emissions (**150-200** tons annually) and provides energy independence for communities vulnerable to climate change impacts and supply disruptions.
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Activity 2 Content (Initially Hidden) -->
+                    <section id="activity2" data-activity-content class="hidden space-y-8">
+                        <h2 class="text-2xl font-bold text-red-600">🌋 Activity 2: Geothermal Energy System</h2>
+                        
+                        <!-- PROBLEM STATEMENT -->
+                        <div class="space-y-4 p-5 bg-red-50 rounded-xl shadow-inner border border-red-200">
+                            <h3 class="text-xl font-bold text-red-700">Problem Statement</h3>
+                            <p class="text-gray-700">Geothermal energy offers reliable, **24/7 baseload power** with capacity factors exceeding **90%**, unlike intermittent solar and wind sources. Yet, despite this advantage, geothermal expansion faces major technical and financial hurdles. Drilling geothermal wells (**1–3 km** deep) is extremely expensive (**$5–10 million per well**), and the underground resource quality is uncertain. There are also safety and environmental risks such as **induced seismicity** from fluid injection, **corrosion** from acidic geothermal fluids, and **reservoir depletion** from poor reinjection practices. Thus, the challenge is to create an **Enhanced Geothermal System (EGS)** that safely maximizes heat extraction, maintains reservoir sustainability, reduces seismic risks, and operates efficiently while keeping costs manageable.</p>
+
+                            <h3 class="text-xl font-bold text-red-700 pt-3 border-t border-red-200">Proposed Solution</h3>
+                            <p class="text-gray-700">The proposed **Enhanced Geothermal Power System** employs cutting-edge methods:
+                                <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                                    <li>**Binary-cycle EGS design** with closed-loop heat extraction using low-boiling fluids (isobutane, pentane).</li>
+                                    <li>**Real-time seismic monitoring** using fiber-optic and microseismic sensors, with AI-based predictive analytics for early warnings.</li>
+                                    <li>**Advanced heat exchange system** utilizing titanium plate exchangers for corrosion resistance and efficient heat transfer.</li>
+                                    <li>**Sustainable water management** through complete reinjection of cooled geothermal brine to preserve reservoir pressure and prevent contamination.</li>
+                                </ul>
+                                This system delivers **5–50 MW** of clean, continuous power, ideal for industrial or district energy applications. It ensures environmental protection, operational safety, and public trust — reducing emissions by **500–800 tons** per MW annually and creating skilled employment in geothermal development zones.</p>
+                        </div>
+                        
+                        <!-- Block Diagram -->
+                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800 flex items-center space-x-2">
+                                <span data-lucide="layout-grid" class="w-5 h-5 text-red-500"></span>
+                                System Block Diagram / Architecture
+                            </h3>
+                            <div class="overflow-x-auto">
+                                <!-- The uploaded image is referenced here -->
+                                <img src="Geothermal block.png" 
+                                     alt="Block Diagram for Geothermal Energy System" 
+                                     class="w-full h-auto rounded-lg shadow-lg min-w-[800px] border-2 border-red-200">
+                            </div>
+                            <p class="image-caption">Fig 2. Enhanced Geothermal System (EGS) with Real-time Monitoring.</p>
+                        </div>
+
+                        <!-- Explanation Section -->
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-semibold text-gray-800 flex items-center space-x-2">
+                                <span data-lucide="message-square" class="w-5 h-5 text-red-500"></span>
+                                Explanation (198 Words)
+                            </h3>
+                            <ul class="list-none space-y-4">
+                                <!-- Source of Energy -->
+                                <li class="p-4 bg-red-50 rounded-lg shadow-sm explanation-content-item">
+                                    <strong class="text-red-700">Source of Energy:</strong> The system utilizes the Earth's geothermal gradient, accessing hot rock formations **1-3 km** deep with temperatures of **150-350&deg;C**. This heat is derived from radioactive decay and residual planetary heat. Enhanced Geothermal Systems (EGS) hydraulically stimulate hot dry rock to create artificial, man-made reservoirs.
+                                </li>
+                                <!-- Conversion Process -->
+                                <li class="p-4 bg-red-50 rounded-lg shadow-sm explanation-content-item">
+                                    <strong class="text-red-700">Conversion Process:</strong> Cold water is injected into the fractured hot rock and circulated to absorb thermal energy, returning to the surface via a production well at **150-250&deg;C**. The Binary Cycle transfers this heat to a working fluid (e.g., isobutane) with a lower boiling point, which vaporizes and drives a turbine/generator. The cooled geothermal brine is completely reinjected into the Earth, ensuring reservoir sustainability. Real-time seismic monitoring is used to regulate pressure and prevent induced seismicity.
+                                </li>
+                                <!-- Output/Utilization -->
+                                <li class="p-4 bg-red-50 rounded-lg shadow-sm explanation-content-item">
+                                    <strong class="text-red-700">Output/Utilization:</strong> The plant generates **5-50 MW** of continuous baseload electricity, boasting a capacity factor exceeding **90%**. The stability of the output makes it a reliable source. Additionally, waste heat from the cooling system can be repurposed for industrial processes or district heating via a Combined Heat and Power (CHP) setup.
+                                </li>
+                                <!-- Real-world Application Relevance -->
+                                <li class="p-4 bg-red-50 rounded-lg shadow-sm explanation-content-item">
+                                    <strong class="text-red-700">Real-world Application Relevance:</strong> Geothermal provides stable, weather-independent power crucial for industrial facilities and communities in geologically suitable areas (e.g., Iceland, Western USA). The inclusion of real-time monitoring addresses public safety concerns regarding induced seismicity, while the closed-loop system prevents environmental contamination, enabling socially acceptable, long-term power generation.
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Activity 3 Content (Initially Hidden) -->
+                    <section id="activity3" data-activity-content class="hidden space-y-8">
+                        <h2 class="text-2xl font-bold text-green-600">🌿 Activity 3: Biomass Energy System</h2>
+                        
+                        <!-- NEW PROBLEM STATEMENT -->
+                        <div class="space-y-4 p-5 bg-green-50 rounded-xl shadow-inner border border-green-200">
+                            <h3 class="text-xl font-bold text-green-700">Problem Statement</h3>
+                            <p class="text-gray-700">Every year, agriculture and forestry produce massive amounts of organic waste — crop residues, animal manure, and wood by-products. In many regions, particularly developing countries like India, over **140 million tons** of crop residue is burned openly, causing severe **air pollution**, respiratory diseases, and greenhouse gas emissions. Conventional biomass combustion systems are inefficient (**15–25%**) and release toxic gases due to incomplete burning. They also face operational challenges like inconsistent feedstock quality, high preprocessing costs, corrosion, and emission control failures that prevent compliance with environmental standards. The main challenge lies in designing a biomass power generation system that can **efficiently process diverse waste materials**, ensure complete combustion or gasification, **meet modern emission standards**, utilize byproducts effectively, and remain economically sustainable for rural agricultural areas.</p>
+
+                            <h3 class="text-xl font-bold text-green-700 pt-3 border-t border-green-200">Proposed Solution</h3>
+                            <p class="text-gray-700">The proposed **Advanced Biomass Gasification and Power System** includes:
+                                <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                                    <li>**Dual-stage gasifier** (**700–1000 &deg;C**) for high-quality syngas production (**CO, H<sub>2</sub>, CH<sub>4</sub>**).</li>
+                                    <li>**Comprehensive preprocessing** — size reduction, drying, and pelletization for uniform fuel feed.</li>
+                                    <li>**Multi-layer emission control** with cyclone separators, filters, scrubbers, and activated carbon units ensuring **99.5%+ particulate removal**.</li>
+                                    <li>**Energy recovery & byproduct utilization**, including combined heat and power (**CHP**) units achieving **75–85% efficiency** and converting ash into fertilizer or construction material.</li>
+                                </ul>
+                                This system converts agricultural waste into clean power (**5–50 MW**), reduces open-field burning, provides income for farmers, and lowers **CO<sub>2</sub>** emissions — promoting a circular economy where waste becomes a renewable energy asset.
+                            </p>
+                        </div>
+
+                        <!-- Block Diagram -->
+                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800 flex items-center space-x-2">
+                                <span data-lucide="layout-grid" class="w-5 h-5 text-green-500"></span>
+                                System Block Diagram / Architecture
+                            </h3>
+                            <div class="overflow-x-auto">
+                                <!-- The uploaded image is referenced here -->
+                                <img src="Biomass Block.png" 
+                                     alt="Block Diagram for Biomass Energy System" 
+                                     class="w-full h-auto rounded-lg shadow-lg min-w-[800px] border-2 border-green-200">
+                            </div>
+                            <p class="image-caption">Fig 3. Integrated Biomass Gasification and Energy Recovery System.</p>
+                        </div>
+
+                        <!-- Explanation Section -->
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-semibold text-gray-800 flex items-center space-x-2">
+                                <span data-lucide="message-square" class="w-5 h-5 text-green-500"></span>
+                                Explanation (199 Words)
+                            </h3>
+                            <ul class="list-none space-y-4">
+                                <!-- Source of Energy -->
+                                <li class="p-4 bg-green-50 rounded-lg shadow-sm explanation-content-item">
+                                    <strong class="text-green-700">Source of Energy:</strong> The system utilizes diverse organic waste, including agricultural residues (e.g., rice husks, straw), forestry waste, and animal manure. The energy, stored from sunlight via photosynthesis, has a density of **15-19 MJ/kg** (dry). Since the **CO<sub>2</sub>** released during conversion equals the **CO<sub>2</sub>** absorbed during plant growth, the system operates on a climate-neutral carbon cycle.
+                                </li>
+                                <!-- Conversion Process -->
+                                <li class="p-4 bg-green-50 rounded-lg shadow-sm explanation-content-item">
+                                    <strong class="text-green-700">Conversion Process:</strong> Pre-processed biomass enters an advanced gasification chamber. Controlled partial oxidation at **700-1000&deg;C** converts the solid material into combustible syngas (**CO, H<sub>2</sub>, CH<sub>4</sub>**). This syngas is cleaned via multi-stage filtration to remove particulates, tars, and acid gases. The clean syngas fuels a high-efficiency gas turbine or engine connected to a generator. Exhaust heat is subsequently recovered via heat exchangers for process applications.
+                                </li>
+                                <!-- Output/Utilization -->
+                                <li class="p-4 bg-green-50 rounded-lg shadow-sm explanation-content-item">
+                                    <strong class="text-green-700">Output/Utilization:</strong> The facility generates **5-50 MW** of electrical power, achieving a capacity factor of **70-85%**. The Combined Heat and Power (CHP) configuration provides an additional **10-30 MW** of thermal energy for heating. Ash and other residues are processed for beneficial reuse as agricultural fertilizer or construction material, supporting a circular economy.
+                                </li>
+                                <!-- Real-world Application Relevance -->
+                                <li class="p-4 bg-green-50 rounded-lg shadow-sm explanation-content-item">
+                                    <strong class="text-green-700">Real-world Application Relevance:</strong> This technology addresses the critical problem of waste management, such as the open burning of crop residue in agricultural regions (e.g., India), which causes severe air pollution. By converting waste into energy, it provides a stable power source, income generation (waste valorization) for farmers, local employment, and significant air quality improvement, supporting sustainable rural development.
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                    
+                    <!-- Activity 4 Content (NEW ML MODEL) -->
+                    <section id="activity4" data-activity-content class="hidden space-y-8">
+                        <h2 class="text-2xl font-bold text-purple-600">🧠 Activity 4: Predictive ML Model for Renewable Energy Efficiency</h2>
+                        <p class="text-gray-700 italic">Project Focus: Utilizing Artificial Intelligence and Machine Learning (AI/ML) to predict the efficiency and suitability of Wave, Geothermal, and Biomass energy systems using synthetic datasets.</p>
+
+                        <!-- GitHub Link -->
+                        <div class="bg-purple-50 p-4 rounded-xl shadow-md flex items-center space-x-4">
+                            <span data-lucide="github" class="w-6 h-6 text-purple-700"></span>
+                            <p class="text-gray-800">
+                                View the full code and detailed analysis on GitHub: 
+                                <a href="https://github.com/VEDgit2005/CleanGreenML" target="_blank" class="text-purple-600 hover:text-purple-800 font-semibold underline">
+                                    https://github.com/VEDgit2005/CleanGreenML
+                                </a>
+                            </p>
+                        </div>
+
+                        <!-- ML Model Explanation -->
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-semibold text-gray-800 flex items-center space-x-2">
+                                <span data-lucide="microscope" class="w-5 h-5 text-purple-500"></span>
+                                Model Overview & Methodology
+                            </h3>
+                            <p class="text-gray-700">
+                                As AI/ML students, we developed a regression model (likely **XGBoost or Random Forest**) to explore how various environmental and operational parameters influence the energy efficiency of different clean energy sources. We used a **synthetic dataset** designed to reflect realistic conditions for Wave, Geothermal, and Biomass systems. The goal was to identify the most **important features** driving efficiency and suitability for predictive operational planning.
+                            </p>
+                        </div>
+
+                        <!-- Visualizations and Results -->
+                        <div class="space-y-6">
+                            <h3 class="text-xl font-semibold text-gray-800 flex items-center space-x-2 border-t pt-4">
+                                <span data-lucide="bar-chart-3" class="w-5 h-5 text-purple-500"></span>
+                                Key Results and Feature Analysis
+                            </h3>
+
+                            <!-- Geothermal Analysis -->
+                            <div class="bg-gray-100 p-4 rounded-xl shadow-sm space-y-4">
+                                <h4 class="text-lg font-bold text-gray-900">1. Geothermal Potential & Suitability</h4>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="flex flex-col items-center">
+                                        <img src="XGBOOST.jpeg" alt="Geothermal Feature Importance (XGBoost)" class="w-full h-auto rounded-lg shadow-md border">
+                                        <p class="image-caption">Fig 4. Feature Importance for Geothermal Suitability.</p>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <img src="3D_geothermal_visualization.jpeg" alt="3D Geothermal Potential Visualization" class="w-full h-auto rounded-lg shadow-md border">
+                                        <p class="image-caption">Fig 5. 3D Geothermal Potential Visualization (Temp, Heat Flow, Pressure).</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <img src="geothermal_2D.jpeg" alt="Geothermal Site Suitability Visualization (2D)" class="w-full h-auto rounded-lg shadow-md border max-w-xl">
+                                    <p class="image-caption">Fig 6. 2D Geothermal Site Suitability Visualization (Heat Flow vs. Temp).</p>
+                                </div>
+                                <p class="text-gray-700 text-sm">
+                                    The feature importance plot (Fig 4) highlights **Temperature** and **Depth** as the dominant factors in determining geothermal potential. The 3D and 2D visualizations (Fig 5, 6) show clear clustering, indicating that higher temperatures and heat flows correlate strongly with **Suitable** sites (blue/dark clusters), confirming the geological constraints of this energy source.
+                                </p>
+                            </div>
+
+                            <!-- Wave Energy Analysis -->
+                            <div class="bg-gray-100 p-4 rounded-xl shadow-sm space-y-4">
+                                <h4 class="text-lg font-bold text-gray-900">2. Wave Energy Efficiency Prediction</h4>
+                                <div class="flex flex-col items-center">
+                                    <img src="wave_feature_importance.jpeg" alt="Feature Importance in Wave Energy Efficiency Prediction" class="w-full h-auto rounded-lg shadow-md border max-w-xl">
+                                    <p class="image-caption">Fig 7. Feature Importance for Wave Energy Efficiency.</p>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="flex flex-col items-center p-2 bg-gray-900 text-green-400 rounded-lg">
+                                        <p class="text-xs text-white my-1">ML Model Output Snippet</p>
+                                        <!-- START: Added image for ML Model Output Snippet -->
+                                        <img src="output.jpeg" alt="Wave Energy ML Model Mean Absolute Error and R-squared" class="w-full h-auto rounded-md">
+                                        <!-- END: Added image for ML Model Output Snippet -->
+                                    </div>
+                                    <div class="flex flex-col items-center p-2 bg-gray-900 text-green-400 rounded-lg">
+                                        <p class="text-xs text-white my-1">Wave Efficiency Prediction Example</p>
+                                        <img src="wave_error.jpeg" alt="Predicted Wave Energy Efficiency: 50.00%" class="w-full h-auto rounded-md">
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 text-sm">
+                                    The Wave Energy model analysis (Fig 7) shows that **Device Efficiency** itself is the overwhelmingly most important model achie feature, followed by factors like Wave Height and Temperature. Theved a high <span class="whitespace-nowrap">**R<sup>2</sup> Score**</span> of **0.904** and a low Mean Absolute Error (MAE) of **3.13**, indicating strong predictive capability for energy output under specific wave conditions. A sample prediction shows **50.00%** efficiency.
+                                </p>
+                            </div>
+
+                            <!-- Biomass Analysis -->
+                            <div class="bg-gray-100 p-4 rounded-xl shadow-sm space-y-4">
+                                <h4 class="text-lg font-bold text-gray-900">3. Biomass Efficiency Prediction</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="flex flex-col items-center">
+                                        <img src="biomass_feature_importance.jpeg" alt="Feature Importance - Biomass Energy Model" class="w-full h-auto rounded-lg shadow-md border">
+                                        <p class="image-caption">Fig 8. Feature Importance for Biomass Efficiency.</p>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <img src="biomass_efficency.jpeg" alt="Biomass Energy Efficiency Prediction (Actual vs Predicted)" class="w-full h-auto rounded-lg shadow-md border">
+                                        <p class="image-caption">Fig 9. Actual vs Predicted Biomass Efficiency Scatter Plot.</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-center p-2 bg-gray-900 text-green-400 rounded-lg max-w-xl mx-auto">
+                                    <p class="text-xs text-white my-1">ML Model Output Snippet</p>
+                                    <img src="snippet.jpeg" alt="Biomass Energy ML Model Mean Absolute Error and R-squared" class="w-full h-auto rounded-md">
+                                </div>
+                                <p class="text-gray-700 text-sm">
+                                    The biomass feature importance (Fig 8) shows that the chemical composition of the feedstock is key, with **Ash Percentage**, **Fixed Carbon**, and **Heating Value** having the highest impact on predicted efficiency. The scatter plot (Fig 9) demonstrates a good correlation between predicted and actual efficiency (close to the red y=x line), with an <span class="whitespace-nowrap">**R<sup>2</sup> Score**</span> of **0.843** and an MAE of **3.57**. A sample prediction shows a **60.00%** efficiency.
+                                </p>
+                            </div>
+                        </div>  
+
+                    </section>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer class="mt-8 text-center text-gray-500 text-sm p-4">
+                &copy; 2025 Portfolio Submission. All documentation generated from source materials.
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // --- UI NAVIGATION LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const navButtons = document.querySelectorAll('button[data-activity]');
+            const contentSections = document.querySelectorAll('section[data-activity-content]');
+
+            function showActivity(activityId) {
+                // 1. Hide all content sections
+                contentSections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+
+                // 2. Show the selected content section
+                const activeSection = document.getElementById(activityId);
+                if (activeSection) {
+                    activeSection.classList.remove('hidden');
+                }
+
+                // 3. Update active state on navigation buttons
+                navButtons.forEach(button => {
+                    button.classList.remove('active');
+                    // Only update the main navigation buttons
+                    if (button.id && button.id === `nav-${activityId}`) {
+                        button.classList.add('active');
+                    }
+                });
+
+                // Ensure the top navigation buttons also get the active class
+                const mainNavButton = document.getElementById(`nav-${activityId}`);
+                if (mainNavButton) {
+                    mainNavButton.classList.add('active');
+                }
+            }
+
+            // Add click listeners to all navigation buttons
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const activityId = button.getAttribute('data-activity');
+                    showActivity(activityId);
+                });
+            });
+
+            // Initialize the portfolio to show Profile on load
+            showActivity('profile');
+        });
+    </script>
+
+</body>
+</html>
